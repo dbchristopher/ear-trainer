@@ -4,7 +4,7 @@ import "./App.css";
 import * as Tone from "tone";
 
 function App() {
-  const hello = async () => {
+  const helloSynth = async () => {
     // Tone.start() returns a promise, the audio will be ready only after that promise is resolved.
     await Tone.start();
     const now = Tone.now();
@@ -19,10 +19,25 @@ function App() {
     synth.triggerRelease(["C4", "C5"], now + 4);
   };
 
+  const helloPiano = async () => {
+    console.log(process.env.PUBLIC_URL);
+    const sampler = new Tone.Sampler({
+      urls: {
+        C3: "C3.mp3",
+      },
+      baseUrl: process.env.PUBLIC_URL,
+    }).toDestination();
+
+    Tone.loaded().then(() => {
+      sampler.triggerAttackRelease(["C3"], 0.5);
+    });
+  };
+
   return (
     <div className="App">
       <Reset />
-      <button onClick={hello}>hello synth</button>
+      <button onClick={helloSynth}>hello synth</button>
+      <button onClick={helloPiano}>hello piano</button>
     </div>
   );
 }
