@@ -1,14 +1,27 @@
 import React from "react";
 import { Reset } from "styled-reset";
 import "./App.css";
+import * as Tone from "tone";
 
 function App() {
-  const hello = () => {
-    //create a synth and connect it to the main output (your speakers)
-    const synth = new (window as any).Tone.Synth().toDestination();
+  const hello = async () => {
+    const note1 = () => {
+      const synth = new Tone.Synth().toDestination();
+      synth.triggerAttackRelease("C4", "8n", now);
+    };
 
-    //play a middle 'C' for the duration of an 8th note
-    synth.triggerAttackRelease("C4", "8n");
+    const note2 = () => {
+      const synth = new Tone.Synth().toDestination();
+      synth.triggerAttackRelease("G4", "8n", now);
+    };
+
+    await Tone.start();
+    //create a synth and connect it to the main output (your speakers)
+    const synth = new Tone.Synth().toDestination();
+
+    const now = Tone.now();
+    note1();
+    note2();
   };
 
   return (
