@@ -1,41 +1,30 @@
 import React from "react";
 import { Reset } from "styled-reset";
-import "./App.css";
 import * as Tone from "tone";
 
 function App() {
-  const helloSynth = async () => {
-    // Tone.start() returns a promise, the audio will be ready only after that promise is resolved.
-    await Tone.start();
-    const now = Tone.now();
-    const synth = new Tone.PolySynth(Tone.Synth).toDestination();
-    // const now = Tone.now();
-    synth.triggerAttack("C4", now);
-    synth.triggerAttack("G4", now);
-    synth.triggerRelease(["C4", "G4"], now + 2);
-
-    synth.triggerAttack("C4", now + 2);
-    synth.triggerAttack("C5", now + 2);
-    synth.triggerRelease(["C4", "C5"], now + 4);
-  };
-
+  const sampler = new Tone.Sampler({
+    urls: {
+      A2: "A2.mp3",
+      C3: "C3.mp3",
+      "D#3": "Ds3.mp3",
+      "F#3": "Fs3.mp3",
+      A3: "A3.mp3",
+      C4: "C4.mp3",
+    },
+    baseUrl: "/instruments/",
+  }).toDestination();
   const helloPiano = async () => {
-    const sampler = new Tone.Sampler({
-      urls: {
-        C3: "C3.mp3",
-      },
-      baseUrl: "/instruments/",
-    }).toDestination();
+    await Tone.start();
 
     Tone.loaded().then(() => {
-      sampler.triggerAttackRelease(["C3"], 1);
+      sampler.triggerAttackRelease(["C3", "G3"], 1);
     });
   };
 
   return (
     <div className="App">
       <Reset />
-      <button onClick={helloSynth}>hello synth</button>
       <button onClick={helloPiano}>hello piano</button>
     </div>
   );
