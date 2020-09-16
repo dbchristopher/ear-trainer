@@ -20,16 +20,15 @@ function App() {
   };
 
   const helloPiano = async () => {
-    console.log(process.env.PUBLIC_URL);
     const sampler = new Tone.Sampler({
       urls: {
         C3: "C3.mp3",
       },
-      baseUrl: process.env.PUBLIC_URL,
+      baseUrl: "/instruments/",
     }).toDestination();
 
     Tone.loaded().then(() => {
-      sampler.triggerAttackRelease(["C3"], 0.5);
+      sampler.triggerAttackRelease(["C3"], 1);
     });
   };
 
