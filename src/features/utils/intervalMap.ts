@@ -1,5 +1,5 @@
 const intervalMap = {
-  0: "Root",
+  0: "Unison",
   1: "Minor 2nd",
   2: "Major 2nd",
   3: "Minor 3rd",
