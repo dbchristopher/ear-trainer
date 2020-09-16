@@ -11,14 +11,18 @@ function App() {
       "F#3": "Fs3.mp3",
       A3: "A3.mp3",
       C4: "C4.mp3",
+      "D#4": "Ds4.mp3",
+      "F#4": "Fs4.mp3",
+      A4: "A4.mp3",
     },
     baseUrl: "/instruments/",
   }).toDestination();
+
   const helloPiano = async () => {
     await Tone.start();
 
     Tone.loaded().then(() => {
-      sampler.triggerAttackRelease(["C3", "G3"], 1);
+      sampler.triggerAttackRelease(["C3", "C4"], 1);
     });
   };
 
