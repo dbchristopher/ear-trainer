@@ -7,10 +7,11 @@ const intervalMap = {
   5: "Perfect Fourth",
   6: "Tritone",
   7: "Perfect Fifth",
-  8: "Major Sixth",
-  9: "Minor Seventh",
-  10: "Major Seventh",
-  11: "Octave",
+  8: "Minor Sixth",
+  9: "Major Sixth",
+  10: "Minor Seventh",
+  11: "Major Seventh",
+  12: "Octave",
 };
 
 export default intervalMap;

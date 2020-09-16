@@ -1,13 +1,14 @@
 import React from "react";
 import * as Tone from "tone";
 import keys from "lodash/keys";
-import toString from "lodash/toString";
+import pick from "lodash/pick";
 import piano from "../../samples/piano";
 import intervalMap from "../utils/intervalMap";
 import pickOctave from "../utils/pickOctave";
 
 const Harmonic = () => {
-  const selectedIntervals: any = intervalMap;
+  // unison, major 3rd, octave
+  const selectedIntervals: any = pick(intervalMap, ["0", "4", "12"]);
   const intervalKeys = keys(selectedIntervals);
 
   const helloPiano = async () => {
@@ -15,8 +16,7 @@ const Harmonic = () => {
       intervalKeys[Math.floor(Math.random() * intervalKeys.length)];
     const notes = pickOctave("C3");
 
-    console.log(selectedIntervals, notes);
-    console.log(selectedIntervals[harmonyToPlay]);
+    console.log(intervalMap, notes);
 
     await Tone.start();
     Tone.loaded().then(() => {
