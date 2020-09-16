@@ -5,29 +5,24 @@ import * as Tone from "tone";
 
 function App() {
   const hello = async () => {
-    const note1 = () => {
-      const synth = new Tone.Synth().toDestination();
-      synth.triggerAttackRelease("C4", "8n", now);
-    };
-
-    const note2 = () => {
-      const synth = new Tone.Synth().toDestination();
-      synth.triggerAttackRelease("G4", "8n", now);
-    };
-
+    // Tone.start() returns a promise, the audio will be ready only after that promise is resolved.
     await Tone.start();
-    //create a synth and connect it to the main output (your speakers)
-    const synth = new Tone.Synth().toDestination();
-
     const now = Tone.now();
-    note1();
-    note2();
+    const synth = new Tone.PolySynth(Tone.Synth).toDestination();
+    // const now = Tone.now();
+    synth.triggerAttack("C4", now);
+    synth.triggerAttack("G4", now);
+    synth.triggerRelease(["C4", "G4"], now + 2);
+
+    synth.triggerAttack("C4", now + 2);
+    synth.triggerAttack("C5", now + 2);
+    synth.triggerRelease(["C4", "C5"], now + 4);
   };
 
   return (
     <div className="App">
       <Reset />
-      <button onClick={hello}>hello</button>
+      <button onClick={hello}>hello synth</button>
     </div>
   );
 }
